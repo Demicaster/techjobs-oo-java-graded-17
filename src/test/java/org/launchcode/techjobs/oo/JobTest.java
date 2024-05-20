@@ -10,7 +10,7 @@ public class JobTest {
     //TODO: Create your unit tests here
 
     @Test
-    public void testSettingJobID(){
+    public void testSettingJobId(){
         Job testJob1 = new Job();
         Job testJob2= new Job();
         assertNotEquals(testJob1,testJob2);
@@ -43,5 +43,48 @@ public class JobTest {
         Job testJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
         assertNotEquals(testJob1.getId(),testJob2.getId());
+    }
+
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine(){
+        Job testJob = new Job();
+        assertEquals(testJob.toString().startsWith(System.lineSeparator()), true);
+        assertEquals(testJob.toString().endsWith(System.lineSeparator()), true);
+
+
+    }
+    @Test
+    public void testToStringContainsCorrectLabelsAndData(){
+        Job testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+        String tester = System.lineSeparator() +
+                "ID: "+ testJob1.getId()+ "\n" +
+                "Name: Product tester\n" +
+                "Employer: ACME\n" +
+                "Location: Desert\n" +
+                "Position Type: Quality control\n" +
+                "Core Competency: Persistence" +
+                System.lineSeparator();
+        assertEquals(testJob1.toString(), tester);
+
+
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField(){
+        Job testJob = new Job();
+
+        String tester =System.lineSeparator() +
+                "ID: " + testJob.getId()+ "\n" +
+                "Name: Data not available\n" +
+                "Employer: Data not available\n" +
+                "Location: Data not available\n" +
+                "Position Type: Data not available\n" +
+                "Core Competency: Data not available" +
+                System.lineSeparator();
+        assertEquals(testJob.toString(), tester);
+
+
     }
 }
